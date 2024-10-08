@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-+ys#m^4p8r5*&8g9^y-&d27siaf#c5yetxov48fyvf4_$!+ui=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt",
     "corsheaders",
+    "drf_yasg",
     "users",
 ]
 
@@ -87,10 +89,10 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "parkinson",
-        "USER": "parkinson",
-        "PASSWORD": "thIl547NlBc1Pkn7J9CN6e93m7kJfe67",
-        "HOST": "dpg-cs2f02jqf0us73a6k4a0-a.oregon-postgres.render.com",
-        "PORT": "5432",
+        "USER": "postgres",
+        "PASSWORD": "nick19990",
+        "HOST": "localhost",
+        "PORT": "5433",
     }
 }
 
