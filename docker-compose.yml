@@ -9,4 +9,18 @@ services:
     ports:
       - "8000:8000"
     restart: always
+
+  postgres:
+    container_name: backend_postgres
+    image: postgres:15
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nick19990
+      - POSTGRES_DB=parkinson
+    restart: always
+    
   
