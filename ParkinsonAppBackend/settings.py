@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "users",
+    "famillyMenber",
+    "helper",
+    "tips",
+    "usersData",
 ]
 
 REST_FRAMEWORK = {

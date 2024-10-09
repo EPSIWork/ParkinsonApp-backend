@@ -3,19 +3,12 @@ import uuid
 from .manager import UserManager
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-
-
-class BaseModel(models.Model):
+        
+class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-        ordering = ['-created_at']
-        
-class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
     password = models.CharField(max_length=255)
