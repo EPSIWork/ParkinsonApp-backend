@@ -1,26 +1,58 @@
-version: "3.3"
+version: '3.3'
 services:
-  web:
-    container_name: backend_api
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - 7812:7812
+    volumes:
+      - .:/usr/src/app
+    # depends_on:
+    #   - db
+    environment:
+      - PORT=7812
+      - NODE_ENV=production
+      - DB_HOST=5.180.149.131
+      - DB_PORT=3306
+      - DB_NAME=marksafeto
+      - DB_USER=marksafeto
+      - DB_PASSWORD=Objectif@1234
+      - JWT_SECRET=egabqGgZ8pdjd4TsV37LUwyaoABWNRXfa7bmdb8vEhFtZqed6PUkb3JFyESbicchykJmHLFqQcKR8ex4ChAnEcURPA
+      - JWT_EXPIRATION_TIME=30d
+      - MAIL_HOST=gmail
+      - MAIL_PORT=2525
+      - MAIL_USER=nicksonmahugnon@gmail.com
+      - MAIL_PASSWORD=jmdeosqywrfiqkun
+      - FRONT_URL=https://marksafeto.pro/
+      - CONFIRM_EMAIL_URL=https://marksafeto.pro/register/confirm-email?token=
+      - RESET_PASSWORD_URL=https://marksafeto.pro/login/reset-password?tid=
+      - SMS_FACTOR_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5MTg1MyIsImlhdCI6MTcwODQ0Mzk5MC43MzUzMzl9.K3nBeMaM7He73RwqXm9C8CE8WPU4QV1l3x0L-viS5dQ
+      - CLICKSEND_KEY=7F3856FC-68A4-A603-1759-B9E099E6C7E8
+      - CLICKSEND_EMAIL=elenagilbert0196@gmail.com
+    command: npm run dev
     restart: always
 
-  postgres:
-    container_name: backend_postgres
-    image: postgres:15
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=nick19990
-      - POSTGRES_DB=parkinson
-    restart: always
-    
-  
+  # db:
+  #   image: mysql:latest
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: Abcd@1234
+  #     MYSQL_DATABASE: marksafeto
+  #     MYSQL_USER: marksafeto
+  #     MYSQL_PASSWORD: kNUt4DUYa9kQFxqNX2nQiMAoPGR7FC
+  #   volumes:
+  #     - ./mysql_data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     PMA_HOST: db
+  #     MYSQL_ROOT_PASSWORD: Abcd@1234
+  #   ports:
+  #     - "9080:80"

@@ -1,20 +1,21 @@
-# syntax=docker/dockerfile:1
-FROM python:3.10
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Use an official Node.js runtime as the base image
+FROM node:21
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Copiez les fichiers de l'application dans le conteneur
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install project dependencies
+RUN npm install
+
+# Copy all project files to the working directory in the container
 COPY . .
 
+# Expose the port on which the Node.js application will run
+EXPOSE 3000
 
-RUN pip install -r requirements.txt
+# Start the Node.js application
+CMD ["node", "server.js"]
 
-
-# RUN python manage.py makemigrations
-# RUN python manage.py migrate
-
-EXPOSE 8000
-
-# Démarrez l'application avec la commande suivante
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
