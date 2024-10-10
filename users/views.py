@@ -12,7 +12,7 @@ from users.serializers import ChangePasswordSerializer, SendMailSerializer, User
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from users.renderers import UserRenderer
-# from .utils import send_reset_password_email
+from django.views.decorators.csrf import csrf_exempt
 
 User = get_user_model()
 
@@ -22,11 +22,14 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     @action(detail=False, methods=['post'], url_path='register')
+    @csrf_exempt
     def register(self, request, *args, **kwargs):
         try:
-            serializer = UserSerializer(data=self.request.data)
+            serializer = UserSerializer(data=request.data)
             if serializer.is_valid():
+                print(serializer)
                 serializer.save()
+                print(serializer.data)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
