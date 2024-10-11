@@ -1,14 +1,17 @@
 # Use an official Node.js runtime as the base image
 FROM node:21
 
+# Install pnpm globally
+RUN npm install -g pnpm
+
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Copy package.json and pnpm-lock.yaml to the working directory
+COPY package*.json pnpm-lock.yaml ./
 
-# Install project dependencies
-RUN npm install
+# Install project dependencies using pnpm
+RUN pnpm install
 
 # Copy all project files to the working directory in the container
 COPY . .
@@ -18,4 +21,3 @@ EXPOSE 3000
 
 # Start the Node.js application
 CMD ["node", "server.js"]
-
