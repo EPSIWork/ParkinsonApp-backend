@@ -5,11 +5,11 @@ import { config } from '../../config/config';
 
 
 export const sequelize = new Sequelize(
-    config.DB_NAME, 
-    config.DB_USER, 
-    config.DB_PASSWORD, 
+    'parkinsonnode',
+    'postgres',
+    'Abcd@1234',
     {
-        host: config.DB_HOST,
+        host: '185.202.236.19',
         dialect: 'postgres',
     }
 );
