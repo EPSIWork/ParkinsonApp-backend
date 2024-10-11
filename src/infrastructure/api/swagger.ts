@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'MarkSafeTo API',
+      title: 'Parkinsonia API',
       version: '1.0.0',
-      description: 'API for MarkSafeTo',
+      description: 'API for Parkinsonia',
     },
     components: {
       securitySchemes: {
